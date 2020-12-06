@@ -1,7 +1,9 @@
 # Alex Themes
 
 [![MIT License][license-image]][license-url]
-[license-url]:LICENSE.txt
+
+[license-image]:http://img.shields.io/badge/license-MIT-000000.svg?style=flat-square
+[license-url]:LICENSE
 
 Welcome to Alex Themes! 
 
