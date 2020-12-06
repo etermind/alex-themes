@@ -1,0 +1,33 @@
+<header class="flex justify-between items-center p-4 space-x-8 border-b-2 border-gray-200shadow">
+    <p class="flex-grow text-blue-900 font-bold text-lg flex items-center">
+        <img class="w-16" src="{{theme.icon}}" />  
+        {{title}}
+    </p>
+    <div class="flex justify-between items-center space-x-2">
+        {% for value in menu %}
+            {% if value.hide %}
+            {% elif value.external %}
+                <a class="hover:text-blue-600 font-bold" href='{{value.link}}' target="{{value.target}}">
+                    {% if value.icon %}
+                        <i class="{{value.icon}}"></i>
+                    {% else %}
+                        {{value.name[lang]}}
+                    {% endif %}
+                </a>
+            {% else %}
+                <a class="hover:text-blue-600 font-bold" href='/{{lang}}/{{value.content}}/index.htm'>
+                    {% if value.icon %}
+                        <i class="{{value.icon}}"></i>
+                    {% else %}
+                        {{value.name[lang]}}
+                    {% endif %}
+                </a>
+            {% endif %}
+        {% endfor %}
+    </div>
+    <div class="flex justify-between space-x-2">
+        {% for l in languages %}
+            <a class="text-blue-600 hover:text-gray-500 uppercase" href='/{{l}}'>{{l}}</a>
+        {% endfor %}
+    </div>
+</header>

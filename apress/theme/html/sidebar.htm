@@ -1,0 +1,43 @@
+<section class="flex flex-col h-full py-8 shadow-md border-r-2 border-gray-100">
+    {% for e in menu %}
+        {% if e.content == theme.start and e.submenus %}
+            {% for entry in e.submenus %}
+                <h4 class="pl-4 mb-2 font-bold text-lg border-gray-300">
+                    {% if entry.submenus %}
+                        {{entry.name[lang]}}
+                    {% else %}
+                        <a class="hover:text-blue-600 text-underline" href='/{{lang}}/{{e.content}}/{{entry.content}}/index.htm'>
+                            {{entry.name[lang]}}
+                        </a>
+                    {% endif %}
+                </h4>
+                <ul class="pl-8">
+                {% for subentry in entry.submenus %}
+                    {% if subentry.hide %}
+                    {% elif subentry.external %}
+                        <li class="py-1">
+                            <a class="hover:text-blue-600 text-underline" href='{{subentry.link}}' target="{{subentry.target}}"></li>
+                                {% if subentry.icon %}
+                                    <i class="{{subentry.icon}}"></i>
+                                {% else %}
+                                    {{subentry.name[lang]}}
+                                {% endif %}
+                            </a>
+                        </li>
+                    {% else %}
+                        <li class="py-1">
+                            <a class="hover:text-blue-600 text-underline" href='/{{lang}}/{{e.content}}/{{entry.content}}/{{subentry.content}}/index.htm'>
+                                {% if subentry.icon %}
+                                    <i class="{{subentry.icon}}"></i>
+                                {% else %}
+                                    {{subentry.name[lang]}}
+                                {% endif %}
+                            </a>
+                        </li>
+                    {% endif %}
+                {% endfor %}
+                </ul>
+            {% endfor %}
+        {% endif %}
+    {% endfor %}
+</section>
