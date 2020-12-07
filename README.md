@@ -17,7 +17,7 @@ By writing markdown files and changing a YAML config, you can create a static si
 
 Here you'll find themes for Alex. Currently we provide:
 
-- [miniral-rb](./minimal-rb/README.md): a minimal red/black theme for Alex. Great for a simple website.
+- [minimal-rb](./minimal-rb/README.md): a minimal red/black theme for Alex. Great for a simple website.
 - [apress](./apress/README.md): a theme to write documentation like VuePress.
 - [astral](./astral/README.md): a modern theme with a simplified blogging section.
 
