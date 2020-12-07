@@ -6,7 +6,7 @@
                     {% if entry.submenus %}
                         {{entry.name[lang]}}
                     {% else %}
-                        <a class="hover:text-blue-600 text-underline" href='/{{lang}}/{{e.content}}/{{entry.content}}/index.htm'>
+                    <a class="hover:text-blue-600 text-underline" href='{{root}}/{{lang}}/{{e.content}}/{{entry.content}}/index.htm'>
                             {{entry.name[lang]}}
                         </a>
                     {% endif %}
@@ -26,7 +26,7 @@
                         </li>
                     {% else %}
                         <li class="py-1">
-                            <a class="hover:text-blue-600 text-underline" href='/{{lang}}/{{e.content}}/{{entry.content}}/{{subentry.content}}/index.htm'>
+                            <a class="hover:text-blue-600 text-underline" href='{{root}}/{{lang}}/{{e.content}}/{{entry.content}}/{{subentry.content}}/index.htm'>
                                 {% if subentry.icon %}
                                     <i class="{{subentry.icon}}"></i>
                                 {% else %}

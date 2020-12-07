@@ -15,7 +15,7 @@
                     {% endif %}
                 </a>
             {% else %}
-                <a class="hover:text-blue-600 font-bold" href='/{{lang}}/{{value.content}}/index.htm'>
+            <a class="hover:text-blue-600 font-bold" href='{{root}}/{{lang}}/{{value.content}}/index.htm'>
                     {% if value.icon %}
                         <i class="{{value.icon}}"></i>
                     {% else %}
@@ -27,7 +27,7 @@
     </div>
     <div class="flex justify-between space-x-2">
         {% for l in languages %}
-            <a class="text-blue-600 hover:text-gray-500 uppercase" href='/{{l}}'>{{l}}</a>
+        <a class="text-blue-600 hover:text-gray-500 uppercase" href='{{root}}/{{l}}'>{{l}}</a>
         {% endfor %}
     </div>
 </header>

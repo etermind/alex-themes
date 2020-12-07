@@ -1,6 +1,6 @@
 # Writing themes
 
-/!\ Rewrite in progress to support v1.0.0 on Alex! (release date: 21st of december) /!\
+/!\ Rewrite in progress to support Alex! v1.0.0 /!\
 
 If you would like to write a custom theme for Alex, it is possible and easy.
 

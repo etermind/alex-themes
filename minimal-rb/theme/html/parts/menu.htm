@@ -6,14 +6,14 @@
                 {% elif entry.external %}
             <li><a href='{{entry.link}}' target="{{entry.target}}">{{entry.name[lang]}}</a></li>
                 {% else %}
-            <li><a href='/{{lang}}/{{entry.content}}/index.htm'>{{entry.name[lang]}}</a></li>
+                <li><a href='{{root}}/{{lang}}/{{entry.content}}/index.htm'>{{entry.name[lang]}}</a></li>
                 {% endif %}
             {% endfor %}
         </ul>
     </menu>
     <div class="languages-container">
         {% for l in languages %}
-        <p><a href='/{{l}}'>{{l}}</a></p>
+        <p><a href='{{root}}/{{l}}'>{{l}}</a></p>
         {% endfor %}
     </div>
 </div>
