@@ -1,5 +1,7 @@
 # Writing themes
 
+/!\ Rewrite in progress to support v1.0.0 on Alex! (release date: 21st of december) /!\
+
 If you would like to write a custom theme for Alex, it is possible and easy.
 
 All you need is to follow those guidelines. In 10 minutes, you'll have your structure and you can start customizing the HTML pages and CSS files. 

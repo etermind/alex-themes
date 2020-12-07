@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+    {% include "./parts/head.htm" %}
+    <body>
+        <h1 class="h1">{{theme.title[lang]}}</h1>
+        {% include "./parts/menu.htm" %}
+         
+        <section>
+            {{content.description | safe}}
+        </section>
+
+        <h2 class="h2">{{themeConfig.languages[lang].news}}</h2>
+        <section>
+            {{content.content | safe}}
+        </section>
+    </body>
+</html>

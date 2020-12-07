@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+    {% include "./parts/head.htm" %}
+	<body class="is-preload">
+        <!-- Wrapper-->
+        <div id="wrapper">
+            {% include "./parts/menu_blog.htm" %}
+            <!-- Main -->
+            <div id="main">
+                <!-- Work -->
+                <article id="blog" class="panel">
+                    <span class="date">{{content.metadata.date | luxon('dd LLL yyyy')}}</span>
+                    {{content.content | safe }}
+                </article>
+            </div>
+            {% include "./parts/footer.htm" %}
+        </div>
+        {% include "./parts/scripts.htm" %}
+    </body>
+</html>

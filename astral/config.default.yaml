@@ -1,0 +1,15 @@
+theme:
+    # Person's name
+    person: 'Jane Doe'
+    # Person's position
+    personTitle: 'Chief Technical Officer @Luxon'
+    # Person's profile picture
+    picture: '/assets/user/imgs/me.jpg'
+    # Person's small description
+    personDescription: 'You can put a nice description here'
+    # Blog section headline
+    blogDescription: "Hereafter you'll find the latest articles I've written mostly about tech and science stuffs!"
+    # Copyright in the footer
+    copyright: 'Jane Doe - 2020'
+    # Index of the blog menu in the menu
+    blogEntry: 2 

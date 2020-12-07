@@ -1,0 +1,5 @@
+theme:
+    # Website title
+    title:
+        fr: 'Mon titre'
+        en: 'Your title'

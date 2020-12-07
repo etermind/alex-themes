@@ -1,0 +1,45 @@
+#home > header > span {
+    margin-top: 1em;
+    display: block;
+}
+
+#blog article > span {
+    font-weight: 400;
+    color: #363636;
+    margin-top: 1em;
+    display: block;
+}
+
+#blog span.date {
+    display: block;
+    text-align: right;
+    margin-bottom: 0.75em;
+}
+
+#blog h1 {
+    margin-bottom: 1.5em;
+}
+
+#blog h2 {
+    margin-bottom: 1.4em;
+}
+
+#blog h3 {
+    margin-bottom: 1.3em;
+}
+
+#blog h4 {
+    margin-bottom: 1.2em;
+}
+
+#blog h5 {
+    margin-bottom: 1.1em;
+}
+
+#blog h6 {
+    margin-bottom: 1em;
+}
+
+#blog pre {
+    margin-bottom: 1em;
+}

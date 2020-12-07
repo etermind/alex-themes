@@ -1,0 +1,16 @@
+supportedLanguages: ['en', 'fr']
+themeOptions:
+    person: 'Person name' 
+    personTitle: 'Person position'
+    picture: 'URL to the profile picture'
+    personDescription: 'Small description in homepage'
+    blogDescription: "Small headline in blog page"
+    copyright: 'Copyright information'
+    blogEntry: '0-indexed entry for the blog part in menu'
+languages:
+    en:
+        aboutMe: 'About Me'
+        blog: 'Blog'
+    fr:
+        aboutMe: 'À propos'
+        blog: 'Blog'

@@ -1,0 +1,10 @@
+supportedLanguages: ['fr', 'en']
+themeOptions:
+    icon: 'Main logo for the website'
+    start: 'Menu item to use when clicking on get started'
+    title: 'Title for the website. It is an object taking every supported languages'
+languages: 
+    fr:
+        start: 'Démarrer'
+    en:
+        start: 'Get started'

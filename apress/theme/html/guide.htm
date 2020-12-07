@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+    {% include "./parts/head.htm" %}
+    <body>
+        {% include "./parts/header.htm" %}
+        <section class="flex w-full h-full">
+            <div class="lg:w-1/5 w-1/4">
+                {% include "./parts/sidebar.htm" %}
+            </div>
+            <section class="flex-grow w-full h-full">
+                <div class="p-12">
+                    {{content.content | safe}}
+                </div>
+            </section>
+        </section>
+    </body>
+    {% include "./parts/scripts.htm" %}
+</html>

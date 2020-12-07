@@ -1,0 +1,11 @@
+# Options for the theme
+theme:
+    # The title
+    title:
+        fr: 'Alex Press'
+        en: 'Alex Press'
+    # The logo
+    icon: /assets/user/imgs/icon.svg
+    # The menu when clicking on get started
+    start: 'guide'
+

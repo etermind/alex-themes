@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html>
+    {% include "./parts/head.htm" %}
+    <body>
+        <h1 class="h1">{{theme.title[lang]}}</h1>
+        {% include "./parts/menu.htm" %}
+         
+        <section>
+            {{content.content | safe}}
+        </section>
+    </body>
+</html>

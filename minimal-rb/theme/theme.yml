@@ -1,0 +1,8 @@
+supportedLanguages: ['fr', 'en']
+themeOptions: 
+    title: 'The website title. This is an object taking every supported languages'
+languages:
+    en:
+        news: 'News'
+    fr: 
+        news: 'Actualités'

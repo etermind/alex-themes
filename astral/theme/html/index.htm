@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+    {% include "./parts/head.htm" %}
+	<body class="is-preload">
+        <!-- Wrapper-->
+        <div id="wrapper">
+            {% include "./parts/menu.htm" %}
+            <!-- Main -->
+            <div id="main">
+
+                <!-- Me -->
+                <article id="home" class="panel intro">
+                    <header>
+                        <h1>{{theme.person}}</h1>
+                        <p>{{theme.personTitle}}</p>
+                        <span>{{theme.personDescription}}</span>
+                    </header>
+                    <a href="#about" class="jumplink pic">
+                        <span class="arrow icon solid fa-chevron-right"><span>{{themeConfig.languages[lang].aboutMe}}</span></span>
+                        <img src="{{theme.picture}}" alt="{{theme.person}}" />
+                    </a>
+                </article>
+
+                <!-- Work -->
+                <article id="blog" class="panel">
+                    <header>
+                        <h2>{{themeConfig.languages[lang].blog}}</h2>
+                    </header>
+                    <p>
+                        {{theme.blogDescription}}
+                    </p>
+                    <section>
+                        {% set blog = menu[theme.blogEntry] %}
+                        <div class="row">
+                            {% for entry in blog.submenus %}
+                                <article class="col-6 col-12-small">
+                                    <a href="/{{lang}}/{{blog.content}}/{{entry.content}}/index.htm#blog" class="image fit grayscale"><img src="{{entry.picture}}" alt="{{entry.name[lang]}}"></a>
+                                    <span>{{entry.name[lang]}}</span>
+                                </article>
+                            {% endfor %}
+                        </div>
+                    </section>
+                </article>
+                
+                <!-- Contact -->
+                <article id="about" class="panel">
+                    <header>
+                        <h2>{{themeConfig.languages[lang].aboutMe}}</h2>
+                    </header>
+                    <p>{{content.about | safe }}</p>
+                </article>
+
+            </div>
+
+            {% include "./parts/footer.htm" %}
+        </div>
+        {% include "./parts/scripts.htm" %}
+    </body>
+</html>

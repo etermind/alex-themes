@@ -1,0 +1,23 @@
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <meta name="description" content="{{meta.description}}"></meta>
+    <meta name="keywords" content="{{meta.keywords}}"></meta>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,300italic,400italic">
+    <link rel="stylesheet" href="/assets/css/main.css" />
+    <link rel="stylesheet" href="/assets/css/monokai.css" type="text/css" media="all">
+    <link rel="stylesheet" href="/assets/css/katex.min.css" type="text/css" media="all">
+    <link rel="stylesheet" href="/assets/css/custom.css" type="text/css" media="all">
+    <noscript><link rel="stylesheet" href="/assets/css/noscript.css" /></noscript>
+    <title>{{title}}</title>
+    {% for script in scripts %}
+        {% if script.content %}
+    <script type="text/javascript">
+        {{script.content | safe}}
+    </script>
+        {% else %}
+    <script type="text/javascript" src="{{script.source}}"></script>
+        {% endif %}
+    {% endfor %}
+</head>
