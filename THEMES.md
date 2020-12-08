@@ -57,7 +57,7 @@ Alex passes the following object to each template:
         [key]: 'CONTENT FROM key.md (key can be replaced by anything)'
     },
     lang: 'THE CURRENT LANGUAGE',
-    languages: ['en', 'fr'] // The list of all languages defined in the config.yaml,
+    languages: ['en', 'fr'], // The list of all languages defined in the config.yaml,
     meta: {
         keywords: 'Comma separated keywords',
         description: 'Meta description in the current language',
