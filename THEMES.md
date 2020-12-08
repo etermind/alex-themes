@@ -1,7 +1,5 @@
 # Writing themes
 
-/!\ Rewrite in progress to support Alex! v1.0.0 /!\
-
 If you would like to write a custom theme for Alex, it is possible and easy.
 
 All you need is to follow those guidelines. In 10 minutes, you'll have your structure and you can start customizing the HTML pages and CSS files. 
@@ -11,29 +9,33 @@ All you need is to follow those guidelines. In 10 minutes, you'll have your stru
 A theme directory has the following structure:
 
 ```
-theme/
-├── css
-│   ├── default.css
-│   └── menu.css
-├── fonts
-├── html
-│   ├── en
-│   │   └── home.htm
-│   ├── fr
-│   │   └── home.htm
-│   ├── head.htm
-│   └── menu.htm
-├── imgs
-└── js
+theme-name/
+├── config.default.yml
+├── README.md
+└── theme
+    ├── css
+    │   ├── default.css
+    │   └── menu.css
+    ├── fonts
+    ├── html
+    │   ├── home.htm
+    │   ├── parts
+    │   │   ├── head.htm
+    │   │   └── menu.htm
+    │   └── simple.htm
+    ├── imgs
+    ├── js
+    └── theme.yml
 ```
 
 - `css` contains all your CSS files
 - `js` contains all your JS files
 - `fonts` contains all your fonts
 - `imgs` contains all your images
-- `html` contains the multilingual HTML templates
+- `html` contains the HTML templates
+- `theme.yml` contains the translations, the supported languages and a description of the theme options
 
-You can reference your assets (css, js, imgs, fonts) in the HTML templates using `/assets/css|js|fonts|imgs/file`.
+You can reference your assets (css, js, imgs, fonts) in the HTML templates using `{{root}}/assets/css|js|fonts|imgs/file`. `{{root}}` being the `rootPath` passed by the user of the theme in the `config.yml`. 
 
 ## Content of the html directory
 
@@ -47,12 +49,12 @@ Alex passes the following object to each template:
 
 ```js
 {
-    title: 'Website title for the current language',
     menu: [], // Information about the menu and its sub-menus
+    subpages: [], // Sub-menus for the current menu item 
     content: {
         metadata: {},
         content: 'CONTENT FROM content.md',
-        [key]: 'CONTENT FROM x.md'
+        [key]: 'CONTENT FROM key.md (key can be replaced by anything)'
     },
     lang: 'THE CURRENT LANGUAGE',
     languages: ['en', 'fr'] // The list of all languages defined in the config.yaml,
@@ -61,28 +63,33 @@ Alex passes the following object to each template:
         description: 'Meta description in the current language',
         [key]: 'Any other meta'
     },
-    subpages: ['subpage1', 'subpage2'], // List of the subpages' name
+    scripts: [], // List of scripts as in config.yml
     theme: {}, // Information specific to the selected theme
+    themeConfig: {}, // Theme configuration (notably passing the translations)
+    root: '', // rootPath field in config.yml
 }
 ```
 
 ## Tutorial: Designing a simple theme:
 
-- Start by creating the default structure:
+### Start by creating the default structure:
 
 ```
-theme/
-├── css
-│   ├── main.css
-├── html
-│   ├── en
-│   │   └── index.htm
-├── fonts
-├── imgs
-└── js
+simple/
+├── config.default.yml
+├── README.md
+└── theme
+    ├── css
+    │   └── main.css
+    ├── fonts
+    ├── html
+    │   └── index.htm
+    ├── imgs
+    ├── js
+    └── theme.yml
 ```
 
-- Create the content of `en/index.htm`:
+### Create the content of `index.htm`:
 
 ```html
 <!DOCTYPE html>
@@ -92,11 +99,20 @@ theme/
         <meta name="viewport" content="width=device-width">
         <meta name="description" content="{{meta.description}}"></meta>
         <meta name="keywords" content="{{meta.keywords}}"></meta>
-        <link rel="stylesheet" href="/assets/css/main.css" type="text/css" media="all">
-        <title>{{title}}</title>
+        <link rel="stylesheet" href="{{root}}/assets/css/main.css" type="text/css" media="all">
+        <title>{{theme.title}}</title>
+        {% for script in scripts %}
+            {% if script.content %}
+        <script type="text/javascript">
+            {{script.content | safe}}
+        </script>
+            {% else %}
+        <script type="text/javascript" src="{{script.source}}"></script>
+            {% endif %}
+        {% endfor %}
     </head>
     <body>
-        <h1 class="h1">{{title}}</h1>
+        <h1 class="h1">{{themeConfig.languages[lang].mainSection}}</h1>
 
         <section>
             {{content.content | safe}}
@@ -109,6 +125,32 @@ The [safe filter](https://mozilla.github.io/nunjucks/templating.html#safe) is us
 
 - Add the relevant CSS in main.css and the relevant JS files
 
+### Create the `theme.yml`:
+
+```yaml
+supportedLanguages: ['en']
+languages: 
+    en:
+        mainSection: 'My main section'
+themeOptions:
+    title: 'Website title'
+```
+
+The `theme.yml` contains three parts:
+
+- `supportedLanguages`: a list of supported languages. We are using [ISO-639-1 standard](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) (two letters to describe the language such as `fr` for French or `en` for English).
+- `languages`: an object describing the translations for each supported languages
+- `themeOptions`: an object containing all the options for this theme with a description.
+
+### Create the `config.default.yml`:
+
+```yaml
+theme:
+    title: "Website's title"
+```
+
+It is here to help the user know what kind of options he can use with your theme.
+
 ## Advanced topics
 
 ### Including partial templates
@@ -116,16 +158,20 @@ The [safe filter](https://mozilla.github.io/nunjucks/templating.html#safe) is us
 Often it is useful to break the HTML templates into reusable chunks. You can use the [include](https://mozilla.github.io/nunjucks/templating.html#include) directive from Nunjucks. For instance, if you wan to have a partial template for the HTML head, you can do it like this:
 
 ```
-theme/
-├── css
-│   ├── main.css
-├── html
-│   ├── en
-│   │   └── index.htm
-│   ├── head.htm
-├── fonts
-├── imgs
-└── js
+simple/
+├── config.default.yml
+├── README.md
+└── theme
+    ├── css
+    │   └── main.css
+    ├── fonts
+    ├── html
+    │   ├── parts
+    │   │   └── head.htm
+    │   └── index.htm
+    ├── imgs
+    ├── js
+    └── theme.yml
 ```
 
 `head.htm`:
@@ -136,20 +182,29 @@ theme/
     <meta name="viewport" content="width=device-width">
     <meta name="description" content="{{meta.description}}"></meta>
     <meta name="keywords" content="{{meta.keywords}}"></meta>
-    <link rel="stylesheet" href="/assets/css/main.css" type="text/css" media="all">
-    <title>{{title}}</title>
+    <link rel="stylesheet" href="{{root}}/assets/css/main.css" type="text/css" media="all">
+    <title>{{theme.title}}</title>
+    {% for script in scripts %}
+        {% if script.content %}
+    <script type="text/javascript">
+        {{script.content | safe}}
+    </script>
+        {% else %}
+    <script type="text/javascript" src="{{script.source}}"></script>
+        {% endif %}
+    {% endfor %}
 </head>
 ```
 
-And then, `en/index.htm` becomes:
+And then, `index.htm` becomes:
 
 ```html
 <!DOCTYPE html>
 <html>
     {% include "../head.htm" %}
     <body>
-        <h1 class="h1">{{title}}</h1>
-         
+        <h1 class="h1">{{themeConfig.languages[lang].mainSection}}</h1>
+
         <section>
             {{content.content | safe}}
         </section>
@@ -177,17 +232,17 @@ my-site
 ├── en
 │   ├── home
 │   │   ├── index.htm
-│   │   └── subpage
+│   │   └── submenu1 
 │   │       ├── index.htm
-│   │       └── subsubpage
+│   │       └── sub-submenu1 
 │   │           └── index.htm
 │   └── index.htm
 ├── fr
 │   ├── home
 │   │   ├── index.htm
-│   │   └── subpage
+│   │   └── submenu1 
 │   │       ├── index.htm
-│   │       └── subsubpage
+│   │       └── sub-submenu1 
 │   │           └── index.htm
 │   └── index.htm
 └── index.htm
@@ -195,7 +250,7 @@ my-site
 
 As you can see, each HTML file is called `index.htm` and respects the structure of the `content` directory.
 
-So you can reference the pages and the subpages using that structure. The direct subpages are also passed to the nunjucks template using the `subpages` array.
+So you can reference the pages and the subpages using that structure. The direct subpages are also passed to the nunjucks template using the `subpages` array. Checkout [Alex! Press](./apress/README.md) that uses this feature for instance.
 
 ### Referencing the default page for each language
 
@@ -229,4 +284,4 @@ Alex passes all markdown fragments to the nunjucks template using the `content` 
 }
 ```
 
-This one, you can design complex themes and allow your users to split their markdown files into chunks.
+This one, you can design complex themes and allow your users to split their markdown files into chunks. Check out [astral](./astral/README.md) that uses this feature for instance.

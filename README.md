@@ -5,8 +5,6 @@
 [license-image]:http://img.shields.io/badge/license-MIT-000000.svg?style=flat-square
 [license-url]:LICENSE
 
-/!\ Rewrite in progress to support v1.0.0 on Alex! (release date: 21st of december) /!\
-
 Welcome to Alex Themes! 
 
 [Alex](https://github.com/etermind/alex) is a minimalist static site generator written in TypeScript.
